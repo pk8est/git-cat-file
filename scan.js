@@ -23,10 +23,10 @@ module.exports.scan = async function(objectDir){
                             return console.info(error)
                         }
 
-                        files.forEach(function(id){
+                        files.forEach(async function(id){
                             let gitId = file + id
                             if(await isCommit(gitId)){
-                                fs.stat(path + '/' + id, function(error, stats){
+                                fs.stat(path + '/' + id, async function(error, stats){
                                     let dir = './target/' + moment(stats.mtime.getTime()).format("'YYYY-MM-DD HH#mm#ss'")
                                     if (!fs.existsSync(dir)) {
                                         fs.mkdirSync(dir)
